@@ -34,3 +34,31 @@ Let's say, I have an App Server A1 , and Master M1 with 3 slave machines S1,S2, 
 1. Single Point Of Failure (SPOF) of dedicated machine.
 2. Additional Hop in every request. [Increasing Latency]
 
+**Solutions:** :)
+ZK exists as a File System.
+
+Lets say, we have,
+
+Service A (Payment Service)
+- app server layer
+- payment DB
+- Global Cache
+Service B (Order Service)
+
+Service C (Payment Service)
+
+Let's zoom in to SErvice A Structure -
+/A/Payment DB -> sharding_config
+              -> shard 1
+              -> shard 2(folder)
+                        -> master_ip (file)
+                        -> master_port
+                        -> slaveA_ip
+                        -> slaveA_port
+                        -> slaveB_ip
+                        -> slaveB_port
+
+The content to these files will be very simple and trivial, just the IP addresses. 
+
+ZK uses this file structure to keep Lock on these files.
+
